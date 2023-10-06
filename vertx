@@ -58,6 +58,7 @@ void floatToBinary()
         if (i % 8 == 0)
             putchar(' ');
     }
+
     cout << "\n\nНажмите любую клавишу, чтобы вернуться в главное меню";
     _getch();
     system("cls");
@@ -77,11 +78,11 @@ void doubleToBinary()
     cin >> doubleD;
     for (int i = 0; i < order_3; i++)
     {
-        if ((i - order_3/2) < 0)
+        if ((i - order_3 / 2) < 0)
         {
             cout << ((doubleM[1] & mask3) ? 1 : 0);
             doubleM[1] = doubleM[1] << 1;
-            if (i == 0 or i == 1 or i == 11)
+            if (i == 0 || i == 11)
                 putchar(' ');
         }
         else
@@ -90,6 +91,7 @@ void doubleToBinary()
             doubleM[0] = doubleM[0] << 1;
         }
     }
+
     cout << "\n\nНажмите любую клавишу, чтобы вернуться в главное меню";
     _getch();
     system("cls");
@@ -111,30 +113,31 @@ void menu()
 
     switch (mainMenu)
     {
-        case 1:
-            sizes();
-            menu();
-            break;
-        case 2:
-            integerToBinary();
-            menu();
-            break;
-        case 3:
-            floatToBinary();
-            menu();
-            break;
-        case 4:
-            doubleToBinary();
-            menu();
-            break;
-        case 5:
-            exit(1);
-            break;
-        default:
-            cout << "Ошибка!!! Попробуйте снова";
-            _getch();
-            menu();
-            system("cls");
+    case 1:
+        sizes();
+        menu();
+        break;
+    case 2:
+        integerToBinary();
+        menu();
+        break;
+    case 3:
+        floatToBinary();
+        menu();
+        break;
+    case 4:
+        doubleToBinary();
+        menu();
+        break;
+    case 5:
+        exit(1);
+        break;
+    default:
+        cout << "Ошибка!!! Попробуйте снова";
+        _getch();
+        menu();
+        system("cls");
+
     }
 }
 
