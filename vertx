@@ -27,7 +27,7 @@ void integerToBinary()
     cout << "Введите число типа int:\n\n";
     cin >> value;
     int order = sizeof(value) * 8;
-    unsigned int mask1 = 1 << order - 1; // спецификатор с маской (вопрос будет на лабе)
+    unsigned int mask1 = 1 << order - 1;
     for (int i = 0; i < order; i++) {
         putchar((value & mask1) ? '1' : '0');
         mask1 >>= 1;
