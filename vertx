@@ -1,0 +1,145 @@
+#include <iostream>
+#include <conio.h>
+
+using namespace std;
+
+void sizes()
+{
+    setlocale(LC_ALL, "RU");
+    cout << "Задание №1" << "\n\n";
+    cout << "Размер int: " << sizeof(int) << "\n"
+        << "Размер short int: " << sizeof(short int) << "\n"
+        << "Размер long int: " << sizeof(long int) << "\n"
+        << "Размер float: " << sizeof(float) << "\n"
+        << "Размер double: " << sizeof(double) << "\n"
+        << "Размер long double: " << sizeof(long double) << "\n"
+        << "Размер char: " << sizeof(char) << "\n"
+        << "Размер bool: " << sizeof(bool) << "\n\n"
+        << "Нажмите любую клавишу, чтобы вернуться в главное меню";
+    _getch();
+    system("cls");
+}
+
+void integerToBinary()
+{
+    cout << "Задание №2: " << "\n\n";
+    int value;
+    cout << "Введите число типа int:\n\n";
+    cin >> value;
+    int order = sizeof(value) * 8;
+    unsigned int mask1 = 1 << order - 1; // спецификатор с маской (вопрос будет на лабе)
+    for (int i = 0; i < order; i++) {
+        putchar((value & mask1) ? '1' : '0');
+        mask1 >>= 1;
+
+        if (i % 8 == 0)
+            putchar(' ');
+    }
+    cout << "\n\nНажмите любую клавишу, чтобы вернуться в главное меню";
+    _getch();
+    system("cls");
+}
+
+void floatToBinary()
+{
+    cout << "\n\n" << "Задание №3" << "\n\n";
+    union
+    {
+        int intA;
+        float floatB;
+    };
+    cout << "Введите число типа float:\n\n";
+    cin >> floatB;
+    int order_2 = sizeof(float) * 8;
+    unsigned int mask2 = 1 << order_2 - 1;
+    for (int i = 0; i < order_2; i++) {
+        putchar((intA & mask2) ? '1' : '0');
+        mask2 >>= 1;
+        if (i % 8 == 0)
+            putchar(' ');
+    }
+    cout << "\n\nНажмите любую клавишу, чтобы вернуться в главное меню";
+    _getch();
+    system("cls");
+}
+
+void doubleToBinary()
+{
+    cout << "\n\n" << "Задание №4" << "\n\n";
+    union
+    {
+        int doubleM[2];
+        double doubleD;
+    };
+    int order_3 = sizeof(float) * 8 * 2;
+    unsigned int mask3 = 1 << order_3 - 1;
+    cout << "\n\nВведите число типа double:\n\n";
+    cin >> doubleD;
+    for (int i = 0; i < order_3; i++)
+    {
+        if ((i - order_3/2) < 0)
+        {
+            cout << ((doubleM[1] & mask3) ? 1 : 0);
+            doubleM[1] = doubleM[1] << 1;
+            if (i == 0 or i == 1 or i == 11)
+                putchar(' ');
+        }
+        else
+        {
+            cout << ((doubleM[0] & mask3) ? 1 : 0);
+            doubleM[0] = doubleM[0] << 1;
+        }
+    }
+    cout << "\n\nНажмите любую клавишу, чтобы вернуться в главное меню";
+    _getch();
+    system("cls");
+}
+
+void menu()
+{
+    setlocale(LC_ALL, "RU");
+    int mainMenu;
+    {
+        cout << "Какой пунке вы хотите выбрать?\n"
+            << "1 - Cколько байтов на вашем компьютере отводится под различные типы данных\n"
+            << "2 - Двоичное представление в памяти числа типа int\n"
+            << "3 - Двоичное представление в памяти числа типа float\n"
+            << "4 - Двоичное представление в памяти числа типа double\n"
+            << "5 - Выход\n\n";
+    }
+    cin >> mainMenu;
+
+    switch (mainMenu)
+    {
+        case 1:
+            sizes();
+            menu();
+            break;
+        case 2:
+            integerToBinary();
+            menu();
+            break;
+        case 3:
+            floatToBinary();
+            menu();
+            break;
+        case 4:
+            doubleToBinary();
+            menu();
+            break;
+        case 5:
+            exit(1);
+            break;
+        default:
+            cout << "Ошибка!!! Попробуйте снова";
+            _getch();
+            menu();
+            system("cls");
+    }
+}
+
+int main()
+{
+    menu();
+    return 0;
+}
