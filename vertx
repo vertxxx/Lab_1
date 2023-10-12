@@ -72,25 +72,22 @@ void doubleToBinary()
         int doubleM[2];
         double doubleD;
     };
-    int order_3 = sizeof(float) * 8 * 2;
+    int order_3 = sizeof(double) * 8;
     unsigned int mask3 = 1 << order_3 - 1;
     cout << "\n\nВведите число типа double:\n\n";
     cin >> doubleD;
-    for (int i = 0; i < order_3; i++)
+    for (int i = 1; i >= 0; i--)
     {
-        if ((i - order_3 / 2) < 0)
+        for (int j = 0; j < order_3 / 2; j++)
         {
-            cout << ((doubleM[1] & mask3) ? 1 : 0);
-            doubleM[1] = doubleM[1] << 1;
-            if (i == 0 || i == 11)
+            putchar((doubleM[i] & mask3) ? '1' : '0');
+            mask3 >>= 1;
+            if (i == 1 && (j == 0 || j == 11))
                 putchar(' ');
         }
-        else
-        {
-            cout << ((doubleM[0] & mask3) ? 1 : 0);
-            doubleM[0] = doubleM[0] << 1;
-        }
+        mask3 = 1 << order_3 - 1;
     }
+        
 
     cout << "\n\nНажмите любую клавишу, чтобы вернуться в главное меню";
     _getch();
@@ -136,7 +133,7 @@ void menu()
         cout << "Ошибка!!! Попробуйте снова";
         _getch();
         menu();
-        system("cls");
+        break;
 
     }
 }
